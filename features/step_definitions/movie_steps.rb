@@ -16,7 +16,7 @@ Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
   #  ensure that that e1 occurs before e2.
   #  page.content  is the entire content of the page as a string.
   #flunk "Unimplemented"
-	assert /#{e1}.*#{e2}/.match( page.content )
+  assert /#{e1}.*#{e2}/.match( page.content )
 end
 
 # Make it easier to express checking or unchecking several boxes at once
@@ -28,7 +28,7 @@ When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
   #   iterate over the ratings and reuse the "When I check..." or
   #   "When I uncheck..." steps in lines 89-95 of web_steps.rb
 	rating_list.split(',').each do |rating|
-		check rating unless uncheck
-		uncheck rating if uncheck
+		check "ratings_#{rating.delete(' ')}" unless uncheck
+		uncheck "ratings_#{rating.delete(' ')}" if uncheck
 	end
 end
