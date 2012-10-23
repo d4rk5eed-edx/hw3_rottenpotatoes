@@ -22,6 +22,15 @@ end
 # Make it easier to express checking or unchecking several boxes at once
 #  "When I uncheck the following ratings: PG, G, R"
 #  "When I check the following ratings: G"
+Then /I should see the following movies: (.*)/ do |movies_list|
+  movies_list.split(',').each do |movie|
+    assert page.has_content?(movie.strip.gsub(/^\"|\"?$/, ''))
+  end
+end
+
+Then /I should see (\d+) movie(?:s)?/ do |movie_count|
+  assert page.all('#movies tbody tr').count == movie_count.to_i
+end
 
 When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
   # HINT: use String#split to split up the rating_list, then

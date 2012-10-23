@@ -26,7 +26,7 @@ Scenario: restrict to movies with 'PG' or 'R' ratings
     And I uncheck the following ratings: G, PG-13
     And I press "ratings_submit"
   
-  Then I should see "The Terminator", "When Harry Met Sally", "Amelie", "The Incredibles", "Raiders of the Lost Ark"
+  Then I should see the following movies: "The Terminator", "When Harry Met Sally", "Amelie", "The Incredibles", "Raiders of the Lost Ark"
     And I should see 5 movies
 
 
