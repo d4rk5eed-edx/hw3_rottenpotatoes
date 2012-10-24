@@ -29,15 +29,17 @@ Scenario: restrict to movies with 'PG' or 'R' ratings
   Then I should see the following movies: "The Terminator", "When Harry Met Sally", "Amelie", "The Incredibles", "Raiders of the Lost Ark"
     And I should see 5 movies
 
-
-  # enter step(s) to check the 'PG' and 'R' checkboxes
-  # enter step(s) to uncheck all other checkboxes
-  # enter step to "submit" the search form on the homepage
-  # enter step(s) to ensure that PG and R movies are visible
-  # enter step(s) to ensure that other movies are not visible
-
 Scenario: no ratings selected
-  # see assignment
+  Given I uncheck all ratings
+  And 	I press "ratings_submit"
+
+  Then I should see the following movies: "Aladdin","The Terminator","When Harry Met Sally","The Help","Chocolat","Amelie","2001: A Space Odyssey","The Incredibles","Raiders of the Lost Ark","Chicken Run"
+  And  I should see 10 movies	
 
 Scenario: all ratings selected
-  # see assignment
+  Given I check all ratings
+  And 	I press "ratings_submit"
+
+  Then I should see the following movies: "Aladdin","The Terminator","When Harry Met Sally","The Help","Chocolat","Amelie","2001: A Space Odyssey","The Incredibles","Raiders of the Lost Ark","Chicken Run"
+  And  I should see 10 movies	
+
