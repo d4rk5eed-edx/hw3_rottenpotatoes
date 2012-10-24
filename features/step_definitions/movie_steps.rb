@@ -41,3 +41,12 @@ When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
 		uncheck "ratings_#{rating.delete(' ')}" if uncheck
 	end
 end
+
+
+When /I (un)?check all ratings/ do |uncheck|
+	rating_list = %w(G PG PG-13 NC-17 R)
+	rating_list.split(',').each do |rating|
+		check "ratings_#{rating.strip}" unless uncheck
+		uncheck "ratings_#{rating.strip}" if uncheck
+	end
+end
