@@ -15,8 +15,11 @@ end
 Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
   #  ensure that that e1 occurs before e2.
   #  page.content  is the entire content of the page as a string.
-  #flunk "Unimplemented"
-  assert /#{e1}.*#{e2}/.match( page.content )
+  if page.respond_to? :should
+    page.should have_text(/#{e1}.*#{e2}/m)
+  else
+    assert /#{e1}.*#{e2}/m.match( page.text )
+  end
 end
 
 # Make it easier to express checking or unchecking several boxes at once
@@ -45,7 +48,7 @@ end
 
 When /I (un)?check all ratings/ do |uncheck|
 	rating_list = %w(G PG PG-13 NC-17 R)
-	rating_list.split(',').each do |rating|
+	rating_list.each do |rating|
 		check "ratings_#{rating.strip}" unless uncheck
 		uncheck "ratings_#{rating.strip}" if uncheck
 	end

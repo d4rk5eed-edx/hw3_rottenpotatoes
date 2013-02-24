@@ -13,10 +13,11 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'capybara'
   gem 'launchy'
-end
-group :test do
+  gem 'rspec-rails' 
   gem 'cucumber-rails'
   gem 'cucumber-rails-training-wheels'
+end
+group :test do
 end
 group :production do
 #  gem 'pg'
